@@ -48,7 +48,7 @@ func addPointsToPlotter(scatterData plotter.XYs, p *plot.Plot) {
 		panic(err)
 	}
 	s.GlyphStyle.Color = color.RGBA{R: 255, B: 128, A: 255}
-	s.GlyphStyle.Radius = vg.Points(1)
+	s.GlyphStyle.Radius = vg.Points(0.5)
 	s.GlyphStyle.Shape = draw.CircleGlyph{}
 
 	// Add the plotters to the plot, with a legend
