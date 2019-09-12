@@ -43,9 +43,9 @@ func xsForOneR(x float64, r float64, n int, skip int) plotter.XYs {
 			pts[i].X = r
 		} else {
 			if x < 0 {
-				pts[i].Y = -10000.0
+				pts[i].Y = 0.0
 			} else {
-				pts[i].Y = 10000.0
+				pts[i].Y = 1.0
 			}
 			pts[i].X = r
 		}

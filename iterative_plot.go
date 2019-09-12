@@ -1,12 +1,13 @@
 package main
 
 import (
-	"gonum.org/v1/plot/vg/draw"
-	"image/color"
-
+	"fmt"
 	"gonum.org/v1/plot"
 	"gonum.org/v1/plot/plotter"
 	"gonum.org/v1/plot/vg"
+	"gonum.org/v1/plot/vg/draw"
+	"image/color"
+	"time"
 )
 
 func main() {
@@ -16,10 +17,20 @@ func main() {
 	// now plot multiple r's
 	n := 1000
 	initialX := 0.02
-	skip := 400
-	initialR := 2.7
-	endR := 3.9
+	skip := 200
+	initialR := -2.51
+	endR := 4.01
 	step := 0.001
+
+	numPoints := 0.0
+	if initialR < 0 {
+		numPoints = endR + -initialR
+	} else {
+		numPoints = endR - initialR
+	}
+	numPoints = (numPoints + float64(skip)) * float64(n) / step
+	fmt.Printf("Calculating %d points...", int64(numPoints))
+	start := time.Now()
 
 	// Create a new plot, set its title and
 	// axis labels.
@@ -37,9 +48,11 @@ func main() {
 	}
 
 	// Save the plot to a PNG file.
-	if err := p.Save(16*vg.Inch, 16*vg.Inch, "points.png"); err != nil {
+	if err := p.Save(24*vg.Inch, 24*vg.Inch, "points.png"); err != nil {
 		panic(err)
 	}
+
+	fmt.Printf("in: %v", time.Since(start))
 }
 
 func addPointsToPlotter(scatterData plotter.XYs, p *plot.Plot) {
